@@ -22,7 +22,7 @@ snapshot()
 
 The actual logic of this module is 7 lines of python. It uses the `fork()` system call to create a copy of your current process in which you can perform any and all operations that you want to test out. Whenever you make a mistake or are done experimenting in your current snapshot simply exit the process, and you will continue in the original process.
 
-The actual logic of the snapshot function boils down to this:
+The snapshot function boils down to this:
 
 ```python
 def snapshot():
