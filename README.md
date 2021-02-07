@@ -18,6 +18,22 @@ snapshot()
 
 [![demo](https://asciinema.org/a/389733.svg)](https://asciinema.org/a/389733?autoplay=1)
 
+# How does it work?
+
+The actual logic of this module is 7 lines of python. It uses the `fork()` system call to create a copy of your current process in which you can perform any and all operations that you want to test out. Whenever you make a mistake or are done experimenting in your current snapshot simply exit the process, and you will continue in the original process.
+
+The actual logic of the snapshot function boils down to this:
+
+```python
+def snapshot():
+    child_pid = os.fork()
+    if child_pid == 0:
+        return True
+    pid, status = os.waitpid(child_pid, 0)
+    assert os.WIFEXITED(status) or os.WIFSIGNALED(status)
+    return False
+```
+
 # Limitations
 
 As of now, this is very rudimentary, it's a simple `fork()` to clone the process state. This does not roll back any operating system state, including: 
