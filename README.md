@@ -44,5 +44,5 @@ As of now, this is very rudimentary, it's a simple `fork()` to clone the process
 Another issue that you will often see is context managers associated with these resources, e.g. temporary files, subprocesses, etc. that will be closed on termination of the child process. These effects will propagate to the original state when debugging and will likely cause errors.
 
 # Todo
-- Flesh out utilities to implement non-snapshot only operations to reduce errors from the above limitations, e.g. closed files, etc.
+- Flesh out utilities to implement root-process-only operations to reduce errors from the above limitations, e.g. closed files, etc.
 - Fix issue with IPython where sometimes you get a file does not exist error on reverting to snapshot
