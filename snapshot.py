@@ -44,6 +44,6 @@ def snapshot():
 
 
 def set_trace(debugger='pdb'):
-    snapshot()
     dbg = __import__(debugger)
     dbg.set_trace()
+    snapshot()
