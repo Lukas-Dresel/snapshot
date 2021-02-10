@@ -46,3 +46,4 @@ Another issue that you will often see is context managers associated with these 
 # Todo
 - Flesh out utilities to implement root-process-only operations to reduce errors from the above limitations, e.g. closed files, etc.
 - Fix issue with IPython where sometimes you get a file does not exist error on reverting to snapshot
+- Fix Ctrl+c sometimes killing the original process
