@@ -26,6 +26,11 @@ def snapshot():
         LAYERS += 1
         return True
 
+    def sig_to_child(signum, frame):
+        os.kill(child_pid, signum)
+
+    # ignore SIGINT as that should go to the child process only until it terminates
+    old_handler = signal.signal(signal.SIGINT, sig_to_child)
     pid, status = os.waitpid(child_pid, 0)
     assert pid == child_pid
     if os.WIFEXITED(status):
@@ -40,10 +45,12 @@ def snapshot():
         import ipdb; ipdb.set_trace()
         assert False
 
+    # we're done handling it, reset the SIGINT handler
+    signal.signal(signal.SIGINT, old_handler)
     return False
 
 
-def set_trace(debugger='pdb'):
+def set_trace(debugger='ipdb'):
     dbg = __import__(debugger)
     dbg.set_trace()
     snapshot()
