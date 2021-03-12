@@ -28,6 +28,16 @@ def print_snapshot_list(context_frames=3):
     print(format_snapshot_list(context_frames=context_frames))
 
 
+def revert_to_snapshot(index):
+    # okay, so snapshot #0 is the parent process, snapshot 1 is the first child, etc.
+    # so, if we want to revert to the initial snapshot (#0) we have to kill SNAPSHOTS[0]['pid'] so that the first child
+    # is killed
+
+    for pid, context in SNAPSHOTS[index:]:
+        # TODO: find a way to make this actually able to clean up after itself even if in `ipython -i`
+        os.kill(pid, 9)
+
+
 def snapshot(context=None):
     global SNAPSHOTS
     child_pid = os.fork()
@@ -37,8 +47,9 @@ def snapshot(context=None):
     if child_pid == 0:
         # in the child we act like nothing happened
         my_pid = os.getpid()
-        print(f"SNAPSHOT process pid={my_pid} created, continuing in snapshot.")
         SNAPSHOTS.append((my_pid, context))
+        print(f"SNAPSHOT #{len(SNAPSHOTS)}(pid={my_pid}) created, continuing in snapshot.")
+
         return True
 
     def sig_to_child(signum, frame):
