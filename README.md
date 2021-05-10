@@ -4,7 +4,8 @@ A small python library to create process snapshots for debugging long-running pr
 # Installation
 
 ```bash
-pip install snapshot
+git clone https://github.com/Lukas-Dresel/snapshot.git
+pip install -e ./snapshot
 ```
 
 # Usage
