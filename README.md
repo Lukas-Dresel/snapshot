@@ -8,6 +8,8 @@ git clone https://github.com/Lukas-Dresel/snapshot.git
 pip install -e ./snapshot
 ```
 
+For easier usage, for now you can use my fork of IPython [Lukas-Dresel/IPython](https://github.com/Lukas-Dresel/ipython) where I added some `ipdb` commands to make debugging seamless with snapshots. I plan to add a dynamic patch mechanism ala monkeyhex to hotpatch the IPython debugger on the fly in the future, but for now you have to use my fork.
+
 # Usage
 
 ```python
