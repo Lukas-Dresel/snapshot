@@ -9,7 +9,7 @@ def f():
 
 TIME = 20
 for i in reversed(range(TIME)):
-    time.sleep(i)
+    time.sleep(1)
     print(f"Have to wait {i:2d} seconds longer, hope you don't mess up debugging me after :P")
 
 ipdb.set_trace()
